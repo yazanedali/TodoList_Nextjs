@@ -28,20 +28,25 @@ import { Textarea } from "@/components/ui/textarea";
 import { formSchema } from "@/schema";
 import { createTodoAction } from "@/actions/todo.actions";
 import { useState } from "react";
+import { Checkbox } from "./ui/checkbox";
+import Spinner from "./Spinner";
 
 
 
 const AddTodoForm = () => {
-    const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
 
-  async function onSubmit(data: z.infer<typeof formSchema>) {
-    console.log(data)
+  async function onSubmit({title, body, completed}: z.infer<typeof formSchema>) {
+    setLoading(true)
     await createTodoAction({
-      title: data.title,
-      body: data.body,
+      title,
+      body,
+      completed
     });
     setIsOpen(false)
+    setLoading(false)
+
     form.reset()
   }
 
@@ -51,75 +56,106 @@ const AddTodoForm = () => {
     defaultValues: {
       title: "",
       body: "",
+      completed: false,
     },
     mode: "onChange"
 
   }
-)
+  )
 
-
-
+  const [loading, setLoading] = useState(false);
   return (
-       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <form>
-          <DialogTrigger asChild>
-            <Button variant="default"> <Plus />Add To Do</Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
-            <DialogHeader>
-              <DialogTitle>Edit profile</DialogTitle>
-              <DialogDescription>
-                Make changes to your profile here. Click save when you&apos;re
-                done.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4">
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <form>
+        <DialogTrigger asChild>
+          <Button variant="default"> <Plus />Add Todo</Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Add Todo</DialogTitle>
+            <DialogDescription>
+              description about add title todo
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4">
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 
-                  <FormField
-                    control={form.control}
-                    name="title"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Title</FormLabel>
-                        <FormControl>
-                          <Input placeholder="shadcn" {...field} />
-                        </FormControl>
+                <FormField
+                  control={form.control}
+                  name="title"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Title</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Todo Title" {...field} />
+                      </FormControl>
+                      <FormDescription>
+                        This is your public display name.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="body"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Body</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Tell us a little bit about yourself"
+                          className="resize-none"
+                          {...field}
+                        />
+                      </FormControl>
+
+                      <FormDescription>
+                        You can <span>@mention</span> other users and organizations.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="completed"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>
+                          Completed
+                        </FormLabel>
                         <FormDescription>
-                          This is your public display name.
+                          Mark the task as completed.
                         </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="body"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Body</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="Tell us a little bit about yourself"
-                            className="resize-none"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormDescription>
-                          You can <span>@mention</span> other users and organizations.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                    <Button type="submit">Save changes</Button>
-                </form>
-              </Form>
-            </div>
-          </DialogContent>
-        </form>
-      </Dialog>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+
+                <Button type="submit" disabled={loading}
+                >
+                  {loading ? (<><Spinner />Saving</>)
+                    :
+                    "Save"
+
+                  }
+                </Button>
+              </form>
+            </Form>
+          </div>
+        </DialogContent>
+      </form>
+    </Dialog>
   )
 }
 
