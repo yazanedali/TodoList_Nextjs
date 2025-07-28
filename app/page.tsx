@@ -1,66 +1,46 @@
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { getTodosAction } from "@/actions/todo.actions";
+import AddTodoForm from "@/components/AddTodoForm";
+
+export default function Home() {
+
+// const formSchema = z.object({
+//   title: z.string().min(2, {
+//     message: "Title must be at least 2 characters.",
+//   })
+//   .max(50, {
+//     message: "Title must not be longer than 50 characters.",
+//   }),
+//   body: z.string()
+//   .max(80, {
+//     message: "Body must not be longer than 80 characters.",
+//   })
+//   .optional(),
+  
+// })
 
 
-export default async function Home() {
-  let i = 1;
+//     function onSubmit(values: z.infer<typeof formSchema>) {
+//     // Do something with the form values.
+//     // ✅ This will be type-safe and validated.
+//     console.log(values)
+//   }
 
-  const todos = await getTodosAction();
+//   // 1. Define your form.
+//   const form = useForm<z.infer<typeof formSchema>>({
+//     resolver: zodResolver(formSchema),
+//     defaultValues: {
+//       title: "",
+//       body: "",
+//     },
+//     mode: "onChange"
+
+//   }
+// )
+
+
+  // const todos = await getTodosAction();
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-
-      <ul>
-        {todos.map(todo => (
-          <li key={todo.id}>{i++}: {todo.email}</li>
-        ))}
-      </ul>
-
-      {/* <Dialog>
-        <form>
-          <DialogTrigger asChild>
-            <Button variant="default"> <Plus />Add To Do</Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
-            <DialogHeader>
-              <DialogTitle>Edit profile</DialogTitle>
-              <DialogDescription>
-                Make changes to your profile here. Click save when you&apos;re
-                done.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4">
-              <div className="grid gap-3">
-                <Label htmlFor="name-1">Name</Label>
-                <Input id="name-1" name="name" defaultValue="Pedro Duarte" />
-              </div>
-              <div className="grid gap-3">
-                <Label htmlFor="username-1">Username</Label>
-                <Input id="username-1" name="username" defaultValue="@peduarte" />
-              </div>
-            </div>
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button variant="outline">Cancel</Button>
-              </DialogClose>
-              <Button type="submit">Save changes</Button>
-            </DialogFooter>
-          </DialogContent>
-        </form>
-      </Dialog> */}
-
+      <AddTodoForm/> 
     </main>
   );
 }
