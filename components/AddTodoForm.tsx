@@ -33,7 +33,7 @@ import Spinner from "./Spinner";
 
 
 
-const AddTodoForm = () => {
+const AddTodoForm = ({userId}: {userId: string | null}) => {
   const [isOpen, setIsOpen] = useState(false)
 
 
@@ -42,7 +42,8 @@ const AddTodoForm = () => {
     await createTodoAction({
       title,
       body,
-      completed
+      completed,
+      user_id: userId || ""
     });
     setIsOpen(false)
     setLoading(false)

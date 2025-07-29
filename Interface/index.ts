@@ -4,6 +4,7 @@ export interface ITodo {
     title: string;
     id: string;
     completed: boolean;
-    createdAt: Date;
+    user_id: string
+    createdAt?: Date;
 
 }

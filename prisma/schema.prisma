@@ -10,8 +10,9 @@ generator client {
 model Todo {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   title     String
-  body     String?
+  body      String?
   completed Boolean  @default(false)
+  user_id   String
   createdAt DateTime @default(now())
 }
 
