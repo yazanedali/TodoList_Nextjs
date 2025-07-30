@@ -69,7 +69,7 @@ export default function TodoTable({ todos }: { todos: ITodo[] }) {
             ) : (
               <TableRow>
                 <TableCell colSpan={4} className="py-6 text-center text-sm text-gray-500 dark:text-gray-400">
-                  You don't have any tasks yet. Start by adding one!
+                  You don&#39;t have any tasks yet. Start by adding one!
                 </TableCell>
               </TableRow>
             )}

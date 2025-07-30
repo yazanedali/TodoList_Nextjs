@@ -157,7 +157,7 @@ const AddTodoForm = ({userId}: {userId: string | null}) => {
                         Mark as completed
                       </FormLabel>
                       <FormDescription className="text-sm text-gray-500 dark:text-gray-400">
-                        Check this if you've already finished this task.
+                        Check this if you&#39;ve already finished this task.
                       </FormDescription>
                     </div>
                   </FormItem>
