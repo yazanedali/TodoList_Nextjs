@@ -8,9 +8,9 @@ const Nav = () => {
             <SignedIn>
                 <UserButton />
             </SignedIn>
-            <SignedOut>
+            {/* <SignedOut>
                 <SignInButton />
-            </SignedOut>
+            </SignedOut> */}
         </nav>
     )
 }

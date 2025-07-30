@@ -12,42 +12,83 @@ import { ITodo } from "@/Interface"
 import { Badge } from "./ui/badge"
 import Todoactions from "./ui/Todoactions";
 
-
 export default function TodoTable({ todos }: { todos: ITodo[] }) {
   return (
-    <Table>
-      <TableCaption>A list of your Todos</TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead >Id</TableHead>
-          <TableHead>Title</TableHead>
-          <TableHead>Completed</TableHead>
-          <TableHead className="flex items-center justify-center">
-            Actions
-          </TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {todos.map((todo) => (
-          <TableRow key={todo?.id}>
-            <TableCell className="font-medium">{todo?.id}</TableCell>
-            <TableCell>{todo?.title}</TableCell>
-            <TableCell>{todo?.completed ?
-              <Badge>Completed</Badge> :
-              <Badge variant={'secondary'}>Incompleted</Badge>
-            }</TableCell>
-            <TableCell className="flex items-center space-x-2 justify-center">
-              <Todoactions todo={todo}/>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-      <TableFooter>
-        <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className="text-right">{!todos.length? "You Dont Have Any Todo Yet" : todos.length}</TableCell>
-        </TableRow>
-      </TableFooter>
-    </Table>
+    <div className="rounded-lg border shadow-sm overflow-hidden dark:border-gray-800">
+      <div className="overflow-x-auto">
+        <Table className="min-w-full">
+          <TableCaption className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+            {todos.length ? `Showing ${todos.length} task(s)` : 'No tasks available'}
+          </TableCaption>
+          
+          <TableHeader className="bg-gray-50 dark:bg-gray-800">
+            <TableRow>
+              <TableHead className="w-[80px] py-3 px-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                ID
+              </TableHead>
+              <TableHead className="py-3 px-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                Title
+              </TableHead>
+              <TableHead className="py-3 px-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                Status
+              </TableHead>
+              <TableHead className="w-[120px] py-3 px-4 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                Actions
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          
+          <TableBody className="divide-y divide-gray-200 dark:divide-gray-700">
+            {todos.length > 0 ? (
+              todos.map((todo) => (
+                <TableRow key={todo.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                  <TableCell className="py-3 px-4 text-sm font-medium text-gray-900 dark:text-gray-100">
+                    {todo.id}
+                  </TableCell>
+                  <TableCell className="py-3 px-4 text-sm text-gray-700 dark:text-gray-300">
+                    <div className="line-clamp-1" title={todo.title}>
+                      {todo.title}
+                    </div>
+                  </TableCell>
+                  <TableCell className="py-3 px-4">
+                    {todo.completed ? (
+                      <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                        Completed
+                      </Badge>
+                    ) : (
+                      <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400">
+                        Pending
+                      </Badge>
+                    )}
+                  </TableCell>
+                  <TableCell className="py-3 px-4 flex justify-center space-x-2">
+                    <Todoactions todo={todo} />
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={4} className="py-6 text-center text-sm text-gray-500 dark:text-gray-400">
+                  You don't have any tasks yet. Start by adding one!
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+          
+          {todos.length > 0 && (
+            <TableFooter className="bg-gray-50 dark:bg-gray-800">
+              <TableRow>
+                <TableCell colSpan={3} className="py-2 px-4 text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Total Tasks
+                </TableCell>
+                <TableCell className="py-2 px-4 text-right text-sm font-medium text-gray-900 dark:text-gray-100">
+                  {todos.length}
+                </TableCell>
+              </TableRow>
+            </TableFooter>
+          )}
+        </Table>
+      </div>
+    </div>
   )
 }
