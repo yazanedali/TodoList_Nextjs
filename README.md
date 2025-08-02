@@ -28,11 +28,6 @@ Create, manage, and complete your personal todos with a clean and responsive UI 
 | [Tailwind CSS](https://tailwindcss.com/) | Utility-first CSS framework |
 | [TypeScript](https://www.typescriptlang.org/) | Static type checking |
 
----
-
-## 📸 Screenshots
-
-*(Add screenshots or demo GIFs here if you have any)*
 
 ---
 
@@ -90,7 +85,6 @@ model Todo {
   completed Boolean  @default(false)
   userId    String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 ```
 
@@ -116,7 +110,3 @@ You can easily deploy this app on [Vercel](https://vercel.com/) (recommended by 
 - [Tailwind CSS Docs](https://tailwindcss.com/docs)
 
 ---
-
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
