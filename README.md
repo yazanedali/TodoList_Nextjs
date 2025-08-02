@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📝 ToDo App (Next.js + Clerk + Prisma + MongoDB)
 
-## Getting Started
+A simple and secure full-stack ToDo application built using **Next.js**, **Clerk** for authentication, **Prisma ORM**, and **MongoDB**.  
+Create, manage, and complete your personal todos with a clean and responsive UI that supports both **light** and **dark** themes.
 
-First, run the development server:
+---
+
+## 🚀 Features
+
+- 🔐 **User Authentication** using [Clerk](https://clerk.dev/)
+- 📄 **Create / Edit / Delete** todos
+- ✅ Mark todos as **complete** or **incomplete**
+- 🖼️ Display todos in a **responsive table**
+- 💡 Support for **Light / Dark / System** themes
+- 🗃️ **MongoDB + Prisma** for modern database handling
+- ⚡ Built with the power of **Next.js App Router**
+
+---
+
+## 🧪 Tech Stack
+
+| Technology | Description |
+|------------|-------------|
+| [Next.js](https://nextjs.org/) | React Framework with SSR and routing |
+| [Clerk](https://clerk.dev/) | Authentication (sign-up, sign-in, session management) |
+| [Prisma](https://prisma.io/) | ORM for database handling |
+| [MongoDB](https://www.mongodb.com/) | NoSQL Database |
+| [Tailwind CSS](https://tailwindcss.com/) | Utility-first CSS framework |
+| [TypeScript](https://www.typescriptlang.org/) | Static type checking |
+
+---
+
+## 📸 Screenshots
+
+*(Add screenshots or demo GIFs here if you have any)*
+
+---
+
+## 🛠️ Getting Started
+
+First, clone the repository:
+
+```bash
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
+```
+
+Install dependencies:
+
+```bash
+npm install
+# or
+yarn
+```
+
+Set up your environment variables:  
+Create a `.env` file in the root with the following:
+
+```env
+DATABASE_URL=your_mongodb_connection_url
+CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+```
+
+Run Prisma to generate the client:
+
+```bash
+npx prisma generate
+```
+
+Start the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ⚙️ Prisma Schema Example
 
-## Learn More
+```prisma
+model Todo {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  body      String?
+  completed Boolean  @default(false)
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📦 Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+You can easily deploy this app on [Vercel](https://vercel.com/) (recommended by Next.js):
 
-## Deploy on Vercel
+1. Push your code to GitHub
+2. Go to [vercel.com](https://vercel.com/)
+3. Connect your repo and set the environment variables
+4. Deploy with one click 🚀
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🙌 Acknowledgements
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Clerk Documentation](https://clerk.dev/docs)
+- [Prisma Docs](https://www.prisma.io/docs)
+- [MongoDB Docs](https://www.mongodb.com/docs/)
+- [Tailwind CSS Docs](https://tailwindcss.com/docs)
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
