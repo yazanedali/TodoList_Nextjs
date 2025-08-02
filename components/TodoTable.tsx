@@ -23,16 +23,16 @@ export default function TodoTable({ todos }: { todos: ITodo[] }) {
           
           <TableHeader className="bg-gray-50 dark:bg-gray-800">
             <TableRow>
-              <TableHead className="w-[80px] py-3 px-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              <TableHead className="w-[100px] sm:w-[80px] py-3 px-2 sm:px-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                 ID
               </TableHead>
-              <TableHead className="py-3 px-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              <TableHead className="py-3 px-2 sm:px-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                 Title
               </TableHead>
-              <TableHead className="py-3 px-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              <TableHead className="py-3 px-2 sm:px-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                 Status
               </TableHead>
-              <TableHead className="w-[120px] py-3 px-4 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              <TableHead className="w-[130px] sm:w-[120px] py-3 px-2 sm:px-4 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                 Actions
               </TableHead>
             </TableRow>
@@ -42,26 +42,28 @@ export default function TodoTable({ todos }: { todos: ITodo[] }) {
             {todos.length > 0 ? (
               todos.map((todo) => (
                 <TableRow key={todo.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50">
-                  <TableCell className="py-3 px-4 text-sm font-medium text-gray-900 dark:text-gray-100">
-                    {todo.id}
+                  <TableCell className="py-3 px-2 sm:px-4 text-sm font-medium text-gray-900 dark:text-gray-100">
+                    <div className="truncate max-w-[80px] sm:max-w-none" title={todo.id}>
+                      {todo.id}
+                    </div>
                   </TableCell>
-                  <TableCell className="py-3 px-4 text-sm text-gray-700 dark:text-gray-300">
+                  <TableCell className="py-3 px-2 sm:px-4 text-sm text-gray-700 dark:text-gray-300">
                     <div className="line-clamp-1" title={todo.title}>
                       {todo.title}
                     </div>
                   </TableCell>
-                  <TableCell className="py-3 px-4">
+                  <TableCell className="py-3 px-2 sm:px-4">
                     {todo.completed ? (
-                      <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
-                        Completed
+                      <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 text-xs">
+                        Done
                       </Badge>
                     ) : (
-                      <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400">
+                      <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400 text-xs">
                         Pending
                       </Badge>
                     )}
                   </TableCell>
-                  <TableCell className="py-3 px-4 flex justify-center space-x-2">
+                  <TableCell className="py-3 px-2 sm:px-4 flex justify-center space-x-1 sm:space-x-2">
                     <Todoactions todo={todo} />
                   </TableCell>
                 </TableRow>
@@ -69,7 +71,7 @@ export default function TodoTable({ todos }: { todos: ITodo[] }) {
             ) : (
               <TableRow>
                 <TableCell colSpan={4} className="py-6 text-center text-sm text-gray-500 dark:text-gray-400">
-                  You don&#39;t have any tasks yet. Start by adding one!
+                  You don&apos;t have any tasks yet. Start by adding one!
                 </TableCell>
               </TableRow>
             )}
@@ -78,10 +80,10 @@ export default function TodoTable({ todos }: { todos: ITodo[] }) {
           {todos.length > 0 && (
             <TableFooter className="bg-gray-50 dark:bg-gray-800">
               <TableRow>
-                <TableCell colSpan={3} className="py-2 px-4 text-sm font-medium text-gray-700 dark:text-gray-300">
+                <TableCell colSpan={3} className="py-2 px-2 sm:px-4 text-sm font-medium text-gray-700 dark:text-gray-300">
                   Total Tasks
                 </TableCell>
-                <TableCell className="py-2 px-4 text-right text-sm font-medium text-gray-900 dark:text-gray-100">
+                <TableCell className="py-2 px-2 sm:px-4 text-right text-sm font-medium text-gray-900 dark:text-gray-100">
                   {todos.length}
                 </TableCell>
               </TableRow>
